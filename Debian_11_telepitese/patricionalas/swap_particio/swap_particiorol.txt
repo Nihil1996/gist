@@ -1,0 +1,2 @@
+ Swap partició használata arra való, hogyha a fizikai memóriánk megtelne akkor a rendszer tudja használni lapozó fájlként.
+ Használata ajánlott, mert előfordulhat hogy egy olyan program/programok tőltődnek be, ami túlhalad a fizikai memória méretén.

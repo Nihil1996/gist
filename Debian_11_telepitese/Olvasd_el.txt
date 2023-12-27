@@ -1,0 +1,3 @@
+A feladatban képernyőképeket fogok készíteni, amivel reprezentalom a folyamatok lépéseit
+és hozzá egy magyarázatot is írok.
+A képernyőképek külön mappákba lesznek és hozzá tartozóan írok hozzá egy magyarázatot is,amihez szükséges lessz a leírás.

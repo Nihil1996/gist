@@ -1,0 +1,4 @@
+1. Miután megirtuk sikeresen a scriptet. Átmásoljuk a cron.daily könyvtárba ,mert napi scriptek közé fog tartozni.  (kép neve: mysql_dump_script_masolas néven) 
+2. Vim program segítségével megnyitom a crontab konfigurációs fájlt. Ezt vim /etc/crontab parancs segítségével teszem meg.
+3. i gombot megnyomom a fájl szerkesztéséhez, ezután beállítom a megfelelő időpontot,indito felhasznalo,elérési út . (kép neve: crontab_beallitasa néven)
+4. Végül elmentem a fájlt :wq parancs segítségével

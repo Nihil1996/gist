@@ -1,0 +1,63 @@
+1.  Root -ként kell belépni a rendszerbe, mert a linux beállítási és telepítési folyamatok megkövetelik a rendszergazdai jogosultságot(kép neve: belepes).
+
+2.  NAGYON FONTOS /etc/apt/sources.list deb kezdődő szakaszt ki kell komentezni, hogy a repositoryból tudjunk telepíteni, mert alapvetően a sor cd meghajtórol szeretné beolvasni a csomagokat(kép neve: deb_cd_rom_hatastalanitasa).
+	Miután ez megvan egy apt-get update parancsot kell végrehajtani.
+
+3. NAGYON FONTOS ahhoz, hogy zavartalanul tudjun települni minden alkalmazás( mert vannak olyan függvénykönyvtárak és egyéb függőségek, amiket fel kell frissíteni. Ez a későbbiek során telepítendő alkalmazások zavartalanul tudjanak települni ) apt-get update && apt-get upgrade -y parancsot kell lefutattni (kép neve: kezdeti_lepes )
+
+4.  Ezt követően meg kell adni apt-get update parancsot, hogy a tükrök frissüljenek és utána installáhatunk. (kép neve: tukor_frissites)
+
+5.  sudo telepítése: apt install -y sudo (kép neve: sudo_telepites)
+
+6.  Midnight Commander telepítése: apt install -y mc (kép neve: Midnight_Commander_telepitese)
+
+7.  htop telepítése: apt install -y htop (kép neve: htop_telepites)
+
+8.  OpenJDK 8 és OpenJDK 11 telepitese:
+
+        - OpenJDK 11 verziót megtaláltam a repostory-ban apt-cache search openjdk | grep 11 parancs segítségével és ezt kővetően installálom apt install -y openjdk-11-jdk parancs segítségével.(kép neve: openjdk_11_megtalalas_es_telepitese)
+
+        - vim /etc/apt/sources.list belépek az állományba.  deb http://deb.debian.org/debian/ sid main linken található repositoryt adunk a rendszerhez. Fontos megjegyezni azt, hogy miután hozzá adtuk a rendszerhez. A repositoryt utána apt update parancsot kell végrehajtani és utána tudunk csak telepíteni.(kép neve: szukseges_repository_hozzadasa)
+
+	- apt install -y openjdk-8-jdk (kép neve: openjdk_8_telepitese)
+
+	- A java 8 verzió telepítése során a telepítő bizonyos szolgáltatásokat ujraindít és megkérdezi hogy ezt automatán tegye vagy nem . A nem választ jelöltem ki, majd ezt követően a kívánt alkalmazás. A cron lessz és, ezután az alkalmazás ujraindul.
+	
+	- javac verzió átállítása és ellenörzése. Első sorban ellenörzöm a java verziót és utána beállítom a szükséges java 8 verziót és végül ellenörzöm a különbséget(Valószínűleg, azért kell a régebi java verzió, hogyha futattunk egy java alkalmazást akkor ne legyen probléma a régebbi java programok futatásánál. Mert előfordulhat egy olyan probléma. A lelfutás során, hogy egy olyan függgvény könyvtár van meghíva a java kódban, ami már nincs benne a java 11 verzióban).(kép neve: javac_verzio_atalitasa)
+
+9.  udemx user létrehozása saját mappával:
+        -   useradd udemx -m -d /opt/udemx (kép neve: udemx_user_letrehozasa)
+10. ssh elérés beállítása pem segítségével
+	- apt install -y openssh-server programot (kép neve: openssh_telepitese)
+
+	- A szükséges rejtett mappa elkészítése az adott felhasználó mappájában mkdir -p ~/.ssh/pem ( az adott felhasználó mappája ~/ jel fogja jelenteni). Ezután belépünk az elkészült mappába cd  (kép neve: pem_mappa_elkeszitese_mappa_belepes)
+
+	- ssh-keygen -b 2048 -f identity -t rsa parancs alkalmazása( -b kapcsoló a kulcs hossz bit adja meg -f fajl nevet adja meg -t a kulcspárhoz használt algoritmus). Ez 2 kulcsot hozz létre egy privát és egy publikus kulcsot
+		-A privát kulcsok a belépéshez szükségesek .  A publkus kulcsok fogják jelenteni, hogy mit szeretnénk elérni. Jelen esetünkben a virtuális gép lessz. A telepito felajánlja a passphrase-t, ami fontos egy plusz védelmi réteget ad a kulcsunkhoz.(kep neve: publikus_es_privat_kulcs_generalasa_listazasa)
+
+	- Miután létrejött. A publikus és privát kulcsra megadjuk chmod 600 parancsot ez arra szolgál, aki létrehozta a fájlt csak az módosíthatja és olvashasa a fájlt. (kép neve: privat_kulcs_biztonsag)
+
+	- Egy ssh elérést beállítottam hogy a privát kulcsot le tudjam tölteni az scp program segítségével ,aminek a parancsa scp root@192.168.1.6:/root/.ssh/pem/identity ${PWD} (kép neve: privat_kulcs_lementese)
+
+	- cat identity.pub >> ~/.ssh/authorized_keys parancsot használva a pubklikus kulcsnak a tartalmát átmásolom authorized_keys fájlba. (kép neve: publikus_kulcs_masolasa)
+
+	- Megnyitom az /etc/ssh/sshd_config és a szükséges módosításokat elvégzem  és utána ujraindítom ssh programot a változtatások érvénybe lépéséhez.(kép neve: ssh_konfig_fajl_es_ssh_program_ujrainditasa)
+
+	- Végerdmenykent egy sikeres belepest hajtottam vegre. (kép neve: sikeres_ssh_belepes )
+
+11. fail2ban telepitese
+
+	- apt install -y fail2ban parancs segítségével telepítem a programot. (kép neve: fail2ban telepitese)
+
+12. fail2ban szabályok létrehozása
+	- ssh-ra való szabály létrehozása a  /etc/fail2ban/jail.local fájlban adható meg. ( kép neve: fail2ban_beallito_fajl)
+
+	- fail2ban program ujraindítása, hogy a változások érvénybe lépjenek. (kép neve: fail2ban_ujrainditasa)
+
+13. nginx telepitese
+
+	- apt install -y nginx. (kép neve: nginx_telepitese)
+
+	- nginx-re való szabály létrehozása a /etc/fail2ban/jail.local fájlban adható meg.
+
+	- fail2ban program ujraindítása, hogy a változások étvénybe lépjenek. (kép neve: fail2ban_ujrainditasa)

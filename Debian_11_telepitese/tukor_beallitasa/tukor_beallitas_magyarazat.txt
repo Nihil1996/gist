@@ -1,0 +1,2 @@
+1.  A képen látható tukor beallitas eredménye /etc/apt/sources.list fájlban lessz látható. (kép neve: tukor_beallitas)
+2.  Miután kiválasztottuk a tükröt felajánlja a telepito a http-proxy használatát, de ez nem lessz szükséges. (kép neve: http-proxy_adatok)

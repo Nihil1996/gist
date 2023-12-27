@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  web:
+    image: nginx
+    restart: unless-stopped # Ez az opció mondja meg, hogyha nem manuálisan állította le a felhasználó, hanem valamilyen más oknál fogva leállt a konténer akkor induljon ujra
+    ports:
+      - 20115:80
+    volumes:
+      - ./web_data:/usr/share/nginx/html  #ide majd kell egy volume,aminek az elérése /usr/share/nginx/html lessz #Itt biztosítani kell a szükséges jogosultságot a konténer mappájára vonatkozóan, hogy a gazadafép is elérje.
+    
+  adatbazis:
+    image: mariadb
+    restart: unless-stopped
+    ports:
+      - 20116:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root #Ez az érték megadása kötelező, mert alap esetben a mariadb nem indul el 
+      #MYSQL_USER: udemx #Ez letrehoz egy olyan felhasználot,akinek altalános jogosultsagai vannak
+      #MYSQL_PASSWORD: udemx # A létrehozott felhasználo jelszava
+      #MYSQL_DATABASE: udemx_db #Ez letrehoz egy adatbázist a udemx felhasználonak
+    volumes: #Itt nagyon fontos a sorrend a volumenál mindig az 1. az inicalizására,beállításra szolgáló volume-ok
+      - ./db_init:/docker-entrypoint-initdb.d #Ez az adatbázis inicalizációját fogja jelenteni
+      - ./db_data:/var/lib/mysql #Ez azért fog kelleni, hogyha ujraindulna konténer vagy megállítanánk az adatbázis adatok ne vesszenek el
+volumes:
+  db_init:  # A konkrét megnevezés is fontos ,így a docker volume ls használva tudjuk látni a megnevezett volumet és a későbbiek során tudjuk törölni is 
+  db_data:
+  db_web_data:

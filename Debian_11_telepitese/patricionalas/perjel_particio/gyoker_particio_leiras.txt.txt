@@ -1,0 +1,1 @@
+/ gyökér partició kötelezően létre kell hozni, mert ebből indulnak ki minden

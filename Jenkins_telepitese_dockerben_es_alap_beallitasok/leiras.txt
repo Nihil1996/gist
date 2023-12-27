@@ -1,0 +1,10 @@
+1. A jenkins konténer egy titkosított jelszót fog adni a bejelentkezéshez.
+    Ezt bemásoljuk az Administrator password mezőbe. (kép neve: admin_jelszo_inicializalasa)
+2. A pluginok telepítését felajánlja itt a javasolt pluginokat telepitettem. (kép neve: javasolt_pluginok_telepitese)
+3. A pluginok telepítésének folyamata. (kép neve: pluginok_telepitesenek_folyamata)
+4. Első rendszergazdai fiók létrehozása. (kép neve: elso_rendszergazda_fiok)
+5. Fő url meghatározása. Itt az alapértelmezetten hagytam. (kép neve: fo_url)
+6. Kezdeti beállítások vége. A jenkins most már használható. (kezdeti_beallitasok_vege)
+7. Worker node létrehozása már megtörtént. Látható a képen, hogy a kijelölt dind konténer.
+    A saját gépemre fog mutatni. Megfigyelhető 793.77G Szabad hely ez úgy lehetséges, hogy a privileged: true
+    segítségével. A host gépem erőforrásait a konténer számára használhatóvá tettem. (kép neve: worker_node)

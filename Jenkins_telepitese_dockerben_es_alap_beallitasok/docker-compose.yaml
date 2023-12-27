@@ -1,0 +1,48 @@
+version: "3.1"
+
+networks: 
+  docker: # A magunk által definiált hálózatot fogja jelenteni.
+
+volumes:
+  jenkins-data: # Ez arra szolgál, hogy jenkins-data kötetet létrehozzunk, amit a későbbiek során látni fogunk docker volume ls parancs segítségével jenkins-data néven.
+  jenkins-docker-certs: # jenkins-docker-certs kötetet létrehozzunk, amit a későbbiek során látni fogunk docker-volume ls parancs segítségével jenkins-docker-certs néven. 
+
+services:
+  jenkins:
+    #image: myjenkins-blueocean
+    image: jenkins/jenkins
+    restart: always # Hibák vagy leállások esetán minidg ujra indul a konténer
+    networks:
+      - docker  # Ez azt jelenti, hogy a docker nevű hálózatban van.
+    ports:
+      - 8080:8080 # Ennek segítségével tudom elérni a jenkins konténert 
+      - 50000:50000 # Ez a jenkins kommunikációs portja
+    tty: true # Ez arra fog szolgálni hogy valamilyen parancsot küldjünk a konténernek
+    volumes:
+      - ./jenkins-data:/var/jenkins_home  # Jenkins program adatai
+      - ./jenkins-docker-certs:/certs/client:ro # Jenkins program tanusítványai
+      - ./workdir:/home/jenkins/agent # Munka mappa
+    environment:
+      - DOCKER_HOST=tcp://docker:2376 # Ez lessz a dind konténer csatlkaozási pontja. Ennek segítségével tud kommunikálni a jenkins a dockerrel
+      - DOCKER_CERT_PATH=/certs/client  # A docker tanusítványok helye
+      - DOCKER_TLS_VERIFY=1 # Docker kliens és docker démon között(dind) a kapcsolat titkosított lessz
+      - JENKINS_SECRET=Jenkins_admin  #  Ezt a sort blokoltam,mert nem célszerű látni a jelszót
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent # Munka mappa
+
+  dind:
+    image: docker:dind
+    privileged: true  # Teljes hozzáférést fog kapni a hosztgép rendszereszközeihez és konfigurációihoz
+    restart: always # Hibák vagy leállások esetén mindig ujra indul a konténer
+    networks:
+      docker:
+        aliases:  # Evvel a kulcs szóval fogjuk engedélyezni a szolgáltatást(dind konténer hálózatát) más a hálózaton belüli(docker hálózaton belüli) más szolgáltatások számára
+          - docker  # Ez azt jelenti, hogy a docker nevű hálózatban van
+    ports:
+      - 2376:2376
+    tty: true # Ez arra fog szolgálni, hogy valamilyen parancsot küldjünk a konténerbe
+    volumes:
+      - ./jenkins-data:/var/jenkins_home  #Jenkins program helye
+      - ./jenkins-docker-certs:/certs/client  # Jenkins docker tanusítványai
+      - ./workdir:/home/jenkins/agent
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs # A Docker tanusítványok helye

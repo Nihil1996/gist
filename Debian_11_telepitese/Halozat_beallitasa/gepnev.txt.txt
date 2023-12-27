@@ -1,0 +1,2 @@
+ Gepnév, aminek a célja, hogyha valamilyen hálózatba van csatlakoztatva a gép akkor felismerhető legyen és megkülönböztethető legyen a többi eszköztől.
+ Egy példát mondva, ha például egy routernek megnézzük a DHCP klienseit (akiknek osztott valamilyen címet a DHCP szerver)akkor látható lessz a gépnév is.

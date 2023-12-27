@@ -1,0 +1,2 @@
+Az adott fájl változtatásait menteni szeretnénk és utána kilépni akkor :wq
+Az adott fájl változtatásait nem szeretnénk menteni akkor :q!

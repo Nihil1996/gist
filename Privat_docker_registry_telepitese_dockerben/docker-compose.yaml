@@ -1,0 +1,31 @@
+version: "2"
+services:
+  registry:
+    image: registry:2
+    environment:
+      - REGISTRY_HTTP_SECRET=o43g2kjgn2iuhv2k4jn2f23f290qfghsdg #Ez a anonim docker belépéshez lessz szükséges
+      - REGISTRY_STORAGE_DELETE_ENABLED=  # Egy üres értéket adtam meg neki, így registry  tárhelye nem törölhető
+    volumes:
+      - ./registry-data:/var/lib/registry
+  ui:
+    image: jc21/registry-ui
+    environment:
+      - NODE_ENV=production
+      - REGISTRY_HOST=registry:5000
+      - REGISTRY_SSL= # Weboldal ui része nem tartalmazz http csatornán fog futni, mert üres az érték
+      - REGISTRY_DOMAIN=  # üres érték így localhost lessz
+      - REGISTRY_STORAGE_DELETE_ENABLED=  # Egy üres értéket adtam meg neki, így a registry tárhelye nem törölhető
+    links:
+      - registry
+    restart: on-failure # Hogyha a kilépési kód egy folyamatnál nem 0 (0 egyenlő a helyes kilépéssel, azaz a program helyesen lefutott és úgy lépet ki. Tegyük fel az exit code 0-tól eltérő akkor valamilyen hiba merül fel a program futattása során.) 
+  proxy:
+    image: jc21/registry-ui-proxy
+    ports:
+      - 80:80
+    depends_on:
+      - ui
+      - registry
+    links:
+      - ui
+      - registry
+    restart: on-failure # Hogyha a kilépési kód egy folyamatnál nem 0 (0 egyenlő a helyes kilépéssel, azaz a program helyesen lefutott és úgy lépet ki. Tegyük fel az exit code 0-tól eltérő akkor valamilyen hiba merül fel a program futattása során.) 

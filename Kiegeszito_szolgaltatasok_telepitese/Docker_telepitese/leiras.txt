@@ -1,0 +1,8 @@
+1. A virtuális gépen az integrációs szolgáltatásokat telepíteni kell,mert ezt követően fogja felismerni a gazdagép fájlrendszerét. (kép neve: integracios_szolgaltatasok_telepitese)
+2. Miután ez feltelepült egy ujraindítást kell elvégeznem a reboot parancs segítségével. (kép neve: ujrainditas)
+3. A virtualis gépen megadom a gazdagépen találhajtó elérési utat, ahol a szkript található. (kép neve: megosztott_mappa_beallitasa)
+4. A virtualis gépen készítek egy mappát megosztott néven mkdir -p /media/megosztott. (kép neve: megosztott_mappa_letrehozasa)
+5. Kilistázom a particokat. Ezt követően felcsatolom a kívánt partíciót. (kép neve: megosztott_mappa_felcsatolasa)
+6. Belépek a megosztott mappába és utána chmod +x docker_telepitese.sh parancs segítségével futatthatóvá teszem. (kép neve: telepites_elokeszitese)
+7. Telepítem a szükséges a szkriptet. ./docker_telepitese.sh (kép neve: szkript_telepites)
+8. hello-wolrd futattása. Itt az --rm kapcsolót használtam miután lefut a konténer utána törlődik is. Ennek akkor van értelme, amikor tesztelési célból indítunk valamit és tudjuk hogy nem fogjuk felhasználni újra. Nem szeretnénk, hogy feleslegesen foglalja a helyet. A docker container ls -a parancsot is használtam, hogy látható legyen valóban tőrlődött. (kép neve: hello_world_kontener)

@@ -1,0 +1,17 @@
+version: '3.3'
+services: # Ez a szolgáltatásokat adja meg. Ez alatt adjuk meg a konténereket és beállításukat
+  mappa_keszito:  # Konténer neve
+    container_name: web_teszt
+    #image: ubuntu
+    build: ./ # Konténer megépítése ./ aktuális mappát fogja jelenteni = Dockerfile 
+    #networks:
+    #  - web_teszt_network
+    ports:
+      - 20118:80  #  host_port:konténer_portja
+    volumes:
+      - "./webes_resz:/var/www/html/"
+volumes:
+  webes_resz:
+#networks:
+#  web_teszt_network:
+#    driver: bridge

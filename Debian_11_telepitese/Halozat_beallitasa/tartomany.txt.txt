@@ -1,0 +1,1 @@
+Ennek a felhasznalasa akkor hasznos, hogyha valamilyen tartomanykezelőt szeretnék készíteni vagy NETBIOS adatoknál lehet még fontos.

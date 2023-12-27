@@ -1,0 +1,2 @@
+A feladat megoldása során a privát github repostiroyt nem tudom kivitelezni, mert a privát github repository-ért fizetni kell.
+A feladat megoldását, így egy nyilvános github reposoitory-ba fogom megoldani

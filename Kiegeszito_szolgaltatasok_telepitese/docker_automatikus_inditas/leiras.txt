@@ -1,0 +1,6 @@
+Docker konténer automatikus indítása
+    1.  Kezdeti lépés lépés maga a docker automatikus indítása a rendszerrel systemctl enable docker (enable segítségével álltom be a rendszer indulásával). (kép neve: docker_automatikus_inditas)
+    2.  Megirom autostart.sh fájlt, ambien egy docker compose up -d parancs lessz(docker compose up -d segítségével indítam docker-compose fájlt), illetve egy chmod +x autostart.sh a fájl futatása érdekében. (kép neve: autostart_elokeszitese)
+    3.  Megírom az /etc/systemd/system/ mappan belül kontenerek_inidtasa.service folyamatott. (kép neve: folyamat_megirasa)
+    4.  A folyamatot elindítom a systemctl enable kontenerk_inditasa parancs segítségével, illetve egy reboot parancsot végrehajtok. (kép neve: folyamat_elinditasa)
+    5.  A végeredményként systemctl status kontenerek_inidtasa.service és egy docker ps parancs segítségével az eredmény látható. (kép neve: vegeredmeny)

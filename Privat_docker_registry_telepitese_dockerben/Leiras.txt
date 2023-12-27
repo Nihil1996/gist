@@ -1,0 +1,7 @@
+1. Elindítom a konténereket a docker compose up segítségével.
+2. Docker program ( ami host gépen található) daemon.json fájlt
+    Módosítani kell, mert a privát repository-nk nem rendelkezzik ssl tanusítvánnyal. (kép neve: sajat_repository_beillesztese)
+3. A rendszert újra kell indítani, hogy a változtatt elemek beolvassa a docker démon. (kép neve: docker_demon_ujrainditasa)
+4. Egy alpine image-t letöltök docker pull alpine. 
+    Ezt követően, egy docker tag alpine localhost/alpine segítségével egy címkét alkalmazzok(localhost/ Ez a rész jelenti melyik registry-be töltöm fel.)
+    Végül docker push localhost/alpine segítségével feltöltöm a saját repostoryba. (kép neve: vegeredmeny)

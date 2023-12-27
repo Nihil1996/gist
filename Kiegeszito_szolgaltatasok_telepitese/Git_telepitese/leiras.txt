@@ -1,0 +1,21 @@
+1. Git program telepítése apt install -y git parancs segítségével. (kép neve: git_telepitese)
+2. git config --list --show-origin . Ennek a parancsnak a segítségével ki listázzuk a fő konfigurációs beállítás értékeit (kép neve: fo_konfiguracio_klistazzasa)
+3. git config --global user.name "udemx@udemx.eu" . Ennek a segítségével megadom a --global kapcsoló segítségével a felhasznalo szintű user.name értékét. (kép neve: felhasznalo_beallitas )
+4. git config --list parancs segítségével kilistázzom az eredményt. (kép neve: konfiuracio_kilistazasa)
+5. ssh-kulcs alapú git elérés beállítása. Itt a saját fiókomat fogom használni.
+        -   ssh-keygen -t rsa -b 4096 -C "nihildescartes@gmail.com" . (kép neve: kulcs_fajl_generalasa)
+                -t = titkosítás algoritmusát fogja jelenteni
+                -b = kulcs hossza bitben (minél nagyobb annál biztonságosabb)
+                -C = komment
+        
+        - Egy passphrase-t is megkell adni, mert ez egy plusz biztonsági faktor ilyenkor egy jelszót is be kell gépelnünk pluszban.
+          Tegyük fel, hogyha valaki hozzáférne a fájlhoz passphrase-hez, hogyha a passphrase jelszót nem adjuk meg akkor be tud lépni.
+
+        -  eval "$(ssh-agent -s)" . FONTOS HOGY ELÖTTE RENDSZERGAZDAKÉNT LÉPJÜNK BE (kép neve: ssh_ugynok_incializalasa)
+            - eval kiértékeli a programot és folyamat azonosítóját fogja kiírni
+            - "$(ssh-agent -s)" rész segítsével a program elindít egy AUTH_SOCK interfészt ,ami egy kaput fog jelenteni(Ez egy szoftveres interfészt, amivel kommunikálni fog a git program)
+
+        - ssh-add github_rsa parancs segítségével hozzáadom a privát kulcsomat ssh-agent programhoz. (kép neve: ssh_ugynok_incializalasa)
+
+        - cat github_rsa.pub parancs segítségével kiíratjuk a képernyőnkre a publikus kulcsot ( publikus kulcs = amit elszeretnénk érni ) . 
+            Majd ezt követően a github oldalára bejelentkezzünk és bemásoljuk a beállítások menüpontba ( kép neve: publikus_kulcs_bemasolasa)
